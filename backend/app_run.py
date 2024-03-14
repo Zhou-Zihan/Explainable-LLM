@@ -26,7 +26,7 @@ def init():
     print('----------------Init----------------')
     global llm
     if llm is not None:
-        return jsonify({"message": "TLI already initialized"})
+        return jsonify({"message": " already initialized"})
     request_data = requestParse(request)
     return jsonify({"message": "init successfully"})
 

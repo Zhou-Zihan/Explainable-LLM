@@ -3,7 +3,7 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="/backend/database/USMLE-Step3.csv">
+        <entry key="/backend/database/usmle2022-process/USMLE-Step3.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
