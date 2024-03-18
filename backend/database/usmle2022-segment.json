@@ -1,6 +1,6 @@
 [
   {
-    "id": 0,
+    "key": 0,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -37,7 +37,7 @@
     ]
   },
   {
-    "id": 1,
+    "key": 1,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -74,7 +74,7 @@
     ]
   },
   {
-    "id": 2,
+    "key": 2,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -107,7 +107,7 @@
     ]
   },
   {
-    "id": 3,
+    "key": 3,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -136,7 +136,7 @@
     ]
   },
   {
-    "id": 4,
+    "key": 4,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -169,7 +169,7 @@
     ]
   },
   {
-    "id": 5,
+    "key": 5,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -194,7 +194,7 @@
     ]
   },
   {
-    "id": 6,
+    "key": 6,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -223,7 +223,7 @@
     ]
   },
   {
-    "id": 7,
+    "key": 7,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -244,7 +244,7 @@
     ]
   },
   {
-    "id": 8,
+    "key": 8,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -269,7 +269,7 @@
     ]
   },
   {
-    "id": 9,
+    "key": 9,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -298,7 +298,7 @@
     ]
   },
   {
-    "id": 10,
+    "key": 10,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -323,7 +323,7 @@
     ]
   },
   {
-    "id": 11,
+    "key": 11,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -348,7 +348,7 @@
     ]
   },
   {
-    "id": 12,
+    "key": 12,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -381,7 +381,7 @@
     ]
   },
   {
-    "id": 13,
+    "key": 13,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -414,7 +414,7 @@
     ]
   },
   {
-    "id": 14,
+    "key": 14,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -455,7 +455,7 @@
     ]
   },
   {
-    "id": 15,
+    "key": 15,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -492,7 +492,7 @@
     ]
   },
   {
-    "id": 16,
+    "key": 16,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -529,7 +529,7 @@
     ]
   },
   {
-    "id": 17,
+    "key": 17,
     "segment": [
       {
         "classification": "medical history-past medical history",
@@ -550,7 +550,7 @@
     ]
   },
   {
-    "id": 18,
+    "key": 18,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -603,7 +603,7 @@
     ]
   },
   {
-    "id": 19,
+    "key": 19,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -636,7 +636,7 @@
     ]
   },
   {
-    "id": 20,
+    "key": 20,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -681,7 +681,7 @@
     ]
   },
   {
-    "id": 21,
+    "key": 21,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -714,7 +714,7 @@
     ]
   },
   {
-    "id": 22,
+    "key": 22,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -747,7 +747,7 @@
     ]
   },
   {
-    "id": 23,
+    "key": 23,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -784,7 +784,7 @@
     ]
   },
   {
-    "id": 24,
+    "key": 24,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -813,7 +813,7 @@
     ]
   },
   {
-    "id": 25,
+    "key": 25,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -842,7 +842,7 @@
     ]
   },
   {
-    "id": 26,
+    "key": 26,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -871,7 +871,7 @@
     ]
   },
   {
-    "id": 27,
+    "key": 27,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -912,7 +912,7 @@
     ]
   },
   {
-    "id": 28,
+    "key": 28,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -957,7 +957,7 @@
     ]
   },
   {
-    "id": 29,
+    "key": 29,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -994,7 +994,7 @@
     ]
   },
   {
-    "id": 30,
+    "key": 30,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1039,7 +1039,7 @@
     ]
   },
   {
-    "id": 31,
+    "key": 31,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -1068,7 +1068,7 @@
     ]
   },
   {
-    "id": 32,
+    "key": 32,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1113,7 +1113,7 @@
     ]
   },
   {
-    "id": 33,
+    "key": 33,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1154,7 +1154,7 @@
     ]
   },
   {
-    "id": 34,
+    "key": 34,
     "segment": [
       {
         "classification": "medical history-past medical history",
@@ -1179,7 +1179,7 @@
     ]
   },
   {
-    "id": 35,
+    "key": 35,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1212,7 +1212,7 @@
     ]
   },
   {
-    "id": 36,
+    "key": 36,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1249,7 +1249,7 @@
     ]
   },
   {
-    "id": 37,
+    "key": 37,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1294,7 +1294,7 @@
     ]
   },
   {
-    "id": 38,
+    "key": 38,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1331,7 +1331,7 @@
     ]
   },
   {
-    "id": 39,
+    "key": 39,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -1360,7 +1360,7 @@
     ]
   },
   {
-    "id": 40,
+    "key": 40,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1393,7 +1393,7 @@
     ]
   },
   {
-    "id": 41,
+    "key": 41,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1438,7 +1438,7 @@
     ]
   },
   {
-    "id": 42,
+    "key": 42,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1491,7 +1491,7 @@
     ]
   },
   {
-    "id": 43,
+    "key": 43,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1520,7 +1520,7 @@
     ]
   },
   {
-    "id": 44,
+    "key": 44,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -1585,7 +1585,7 @@
     ]
   },
   {
-    "id": 45,
+    "key": 45,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1618,7 +1618,7 @@
     ]
   },
   {
-    "id": 46,
+    "key": 46,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1647,7 +1647,7 @@
     ]
   },
   {
-    "id": 47,
+    "key": 47,
     "segment": [
       {
         "classification": "medical history-past medical history",
@@ -1676,7 +1676,7 @@
     ]
   },
   {
-    "id": 48,
+    "key": 48,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1705,7 +1705,7 @@
     ]
   },
   {
-    "id": 49,
+    "key": 49,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -1738,7 +1738,7 @@
     ]
   },
   {
-    "id": 50,
+    "key": 50,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1771,7 +1771,7 @@
     ]
   },
   {
-    "id": 51,
+    "key": 51,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1808,7 +1808,7 @@
     ]
   },
   {
-    "id": 52,
+    "key": 52,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1845,7 +1845,7 @@
     ]
   },
   {
-    "id": 53,
+    "key": 53,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1886,7 +1886,7 @@
     ]
   },
   {
-    "id": 54,
+    "key": 54,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1919,7 +1919,7 @@
     ]
   },
   {
-    "id": 55,
+    "key": 55,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1952,7 +1952,7 @@
     ]
   },
   {
-    "id": 56,
+    "key": 56,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -1981,7 +1981,7 @@
     ]
   },
   {
-    "id": 57,
+    "key": 57,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2014,7 +2014,7 @@
     ]
   },
   {
-    "id": 58,
+    "key": 58,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2055,7 +2055,7 @@
     ]
   },
   {
-    "id": 59,
+    "key": 59,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2084,7 +2084,7 @@
     ]
   },
   {
-    "id": 60,
+    "key": 60,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2125,7 +2125,7 @@
     ]
   },
   {
-    "id": 61,
+    "key": 61,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2158,7 +2158,7 @@
     ]
   },
   {
-    "id": 62,
+    "key": 62,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -2187,7 +2187,7 @@
     ]
   },
   {
-    "id": 63,
+    "key": 63,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2220,7 +2220,7 @@
     ]
   },
   {
-    "id": 64,
+    "key": 64,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -2253,7 +2253,7 @@
     ]
   },
   {
-    "id": 65,
+    "key": 65,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -2282,7 +2282,7 @@
     ]
   },
   {
-    "id": 66,
+    "key": 66,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2315,7 +2315,7 @@
     ]
   },
   {
-    "id": 67,
+    "key": 67,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2344,7 +2344,7 @@
     ]
   },
   {
-    "id": 68,
+    "key": 68,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -2373,7 +2373,7 @@
     ]
   },
   {
-    "id": 69,
+    "key": 69,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -2398,7 +2398,7 @@
     ]
   },
   {
-    "id": 70,
+    "key": 70,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2439,7 +2439,7 @@
     ]
   },
   {
-    "id": 71,
+    "key": 71,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2472,7 +2472,7 @@
     ]
   },
   {
-    "id": 72,
+    "key": 72,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2501,7 +2501,7 @@
     ]
   },
   {
-    "id": 73,
+    "key": 73,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2534,7 +2534,7 @@
     ]
   },
   {
-    "id": 74,
+    "key": 74,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2563,7 +2563,7 @@
     ]
   },
   {
-    "id": 75,
+    "key": 75,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2588,7 +2588,7 @@
     ]
   },
   {
-    "id": 76,
+    "key": 76,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2621,7 +2621,7 @@
     ]
   },
   {
-    "id": 77,
+    "key": 77,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2654,7 +2654,7 @@
     ]
   },
   {
-    "id": 78,
+    "key": 78,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2687,7 +2687,7 @@
     ]
   },
   {
-    "id": 79,
+    "key": 79,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2720,7 +2720,7 @@
     ]
   },
   {
-    "id": 80,
+    "key": 80,
     "segment": [
       {
         "classification": "medical history-social diseases",
@@ -2745,7 +2745,7 @@
     ]
   },
   {
-    "id": 81,
+    "key": 81,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2774,7 +2774,7 @@
     ]
   },
   {
-    "id": 82,
+    "key": 82,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2803,7 +2803,7 @@
     ]
   },
   {
-    "id": 83,
+    "key": 83,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2832,7 +2832,7 @@
     ]
   },
   {
-    "id": 84,
+    "key": 84,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2861,7 +2861,7 @@
     ]
   },
   {
-    "id": 85,
+    "key": 85,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2898,7 +2898,7 @@
     ]
   },
   {
-    "id": 86,
+    "key": 86,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2927,7 +2927,7 @@
     ]
   },
   {
-    "id": 87,
+    "key": 87,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2960,7 +2960,7 @@
     ]
   },
   {
-    "id": 88,
+    "key": 88,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -2993,7 +2993,7 @@
     ]
   },
   {
-    "id": 89,
+    "key": 89,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3022,7 +3022,7 @@
     ]
   },
   {
-    "id": 90,
+    "key": 90,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3055,7 +3055,7 @@
     ]
   },
   {
-    "id": 91,
+    "key": 91,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3084,7 +3084,7 @@
     ]
   },
   {
-    "id": 92,
+    "key": 92,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3133,7 +3133,7 @@
     ]
   },
   {
-    "id": 93,
+    "key": 93,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -3154,7 +3154,7 @@
     ]
   },
   {
-    "id": 94,
+    "key": 94,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3191,7 +3191,7 @@
     ]
   },
   {
-    "id": 95,
+    "key": 95,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3232,7 +3232,7 @@
     ]
   },
   {
-    "id": 96,
+    "key": 96,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -3261,7 +3261,7 @@
     ]
   },
   {
-    "id": 97,
+    "key": 97,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3298,7 +3298,7 @@
     ]
   },
   {
-    "id": 98,
+    "key": 98,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3339,7 +3339,7 @@
     ]
   },
   {
-    "id": 99,
+    "key": 99,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3376,7 +3376,7 @@
     ]
   },
   {
-    "id": 100,
+    "key": 100,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3413,7 +3413,7 @@
     ]
   },
   {
-    "id": 101,
+    "key": 101,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3442,7 +3442,7 @@
     ]
   },
   {
-    "id": 102,
+    "key": 102,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -3487,7 +3487,7 @@
     ]
   },
   {
-    "id": 103,
+    "key": 103,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3520,7 +3520,7 @@
     ]
   },
   {
-    "id": 104,
+    "key": 104,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3557,7 +3557,7 @@
     ]
   },
   {
-    "id": 105,
+    "key": 105,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -3598,7 +3598,7 @@
     ]
   },
   {
-    "id": 106,
+    "key": 106,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3639,7 +3639,7 @@
     ]
   },
   {
-    "id": 107,
+    "key": 107,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3672,7 +3672,7 @@
     ]
   },
   {
-    "id": 108,
+    "key": 108,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3725,7 +3725,7 @@
     ]
   },
   {
-    "id": 109,
+    "key": 109,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3782,7 +3782,7 @@
     ]
   },
   {
-    "id": 110,
+    "key": 110,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3831,7 +3831,7 @@
     ]
   },
   {
-    "id": 111,
+    "key": 111,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3860,7 +3860,7 @@
     ]
   },
   {
-    "id": 112,
+    "key": 112,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3893,7 +3893,7 @@
     ]
   },
   {
-    "id": 113,
+    "key": 113,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3922,7 +3922,7 @@
     ]
   },
   {
-    "id": 114,
+    "key": 114,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -3951,7 +3951,7 @@
     ]
   },
   {
-    "id": 115,
+    "key": 115,
     "segment": [
       {
         "classification": "medical history-chief complaint",
@@ -3976,7 +3976,7 @@
     ]
   },
   {
-    "id": 116,
+    "key": 116,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -4009,7 +4009,7 @@
     ]
   },
   {
-    "id": 117,
+    "key": 117,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -4038,7 +4038,7 @@
     ]
   },
   {
-    "id": 118,
+    "key": 118,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -4079,7 +4079,7 @@
     ]
   },
   {
-    "id": 119,
+    "key": 119,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -4108,7 +4108,7 @@
     ]
   },
   {
-    "id": 120,
+    "key": 120,
     "segment": [
       {
         "classification": "medical history-identification and demographics",
@@ -4153,7 +4153,7 @@
     ]
   },
   {
-    "id": 121,
+    "key": 121,
     "segment": [
       {
         "classification": "medical history-identification and demographics",

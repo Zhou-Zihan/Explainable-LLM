@@ -2,7 +2,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+// const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 // 生产环境才抽离css文件，避免开发环境下修改css后热更新不加载问题
 getStyleLoader = () => {
@@ -25,18 +25,18 @@ module.exports = {
       filename: 'css/[name]-[contenthash].css'
     }),
     // new ProgressBarPlugin(),
-    new FriendlyErrorsWebpackPlugin({
-      compilationSuccessInfo: {
-        messages: [`You application is running here http://localhost:8080`]
-      },
-      onErrors: function (severity, errors) {
-        // You can listen to errors transformed and prioritized by the plugin
-        // severity can be 'error' or 'warning'
-      },
-      // should the console be cleared between each compilation?
-      // default is true
-      clearConsole: true
-    })
+    // new FriendlyErrorsWebpackPlugin({
+    //   compilationSuccessInfo: {
+    //     messages: [`You application is running here http://localhost:8080`]
+    //   },
+    //   onErrors: function (severity, errors) {
+    //     // You can listen to errors transformed and prioritized by the plugin
+    //     // severity can be 'error' or 'warning'
+    //   },
+    //   // should the console be cleared between each compilation?
+    //   // default is true
+    //   clearConsole: true
+    // })
   ],
 
   devtool: 'inline-source-map',
@@ -61,6 +61,9 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: { '^/api': '' }
       }
+    },
+    client:{
+      overlay: false
     }
   },
 
@@ -68,7 +71,8 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src')
     },
-    extensions: ['.ts', '.tsx', '.js', 'config.js', '.json']
+    // extensions: ['.ts', '.tsx', '.js', 'config.js', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.json']
   },
 
   module: {
@@ -142,5 +146,6 @@ module.exports = {
         }
       }
     }
-  }
+  },
+
 }

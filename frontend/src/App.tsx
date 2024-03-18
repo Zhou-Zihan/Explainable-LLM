@@ -1,5 +1,5 @@
 import React from 'react'
-import 'antd/dist/antd.css'
+// import 'antd/dist/antd.css'
 import './index.less'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import MedCheck from './pages/MedCheck'

@@ -16,7 +16,7 @@ filtered_data = data[data['Type of Question'] == 'MC-NJ'].reset_index()
 len = int(filtered_data.shape[0])
 
 for idx in range(0, len):
-    item = {"id": idx, "question_stem": "", "question": "", "options": []}
+    item = {"key": idx, "question_stem": "", "question": "", "options": []}
     text = filtered_data.loc[idx]["Question"]
 
     question_match = re.search(r'(.+?)\s*\(A\)', text, re.DOTALL)
