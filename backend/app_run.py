@@ -1,6 +1,10 @@
+import re
+import openai
 from flask import Flask, jsonify, request, Blueprint, render_template, abort, send_from_directory
 
 
+openai.api_key = "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"  
+openai.api_base = "https://api.jarvis73.com/v1"  
 
 # Initialize the app
 app = Flask(__name__)
@@ -30,6 +34,56 @@ def init():
     request_data = requestParse(request)
     return jsonify({"message": "init successfully"})
 
+
+def process_text(user_text):  
+    with open('system_prompt.txt') as f:
+        system_prompt = f.read()
+    with open('reply_prompt.txt') as f:
+        reply_prompt = f.read()
+
+    msg = [ 
+        {"role": "system", "content": "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Style your responses in Markdown."},
+        {"role": "user", "content": system_prompt},
+        {"role": "assistant", "content": reply_prompt},
+        {"role": "user", "content": user_text},
+        # {"role": "assistant", "content": second_reply_prompt},
+        # {"role": "user", "content": second_user_prompt}
+    ]
+    print(msg)
+    openai_response = openai.ChatCompletion.create(
+        model='gpt-3.5-turbo',
+        max_tokens=2048,
+        temperature=0,
+        messages=msg,
+        # stream=True
+    )
+    generated_text = openai_response['choices'][0]['message']['content']
+    print(generated_text)
+      
+    matches = re.finditer(r'\d+\) \((.*?)\)\n', generated_text)  
+    updated_text = generated_text  
+    kv_list = []  
+  
+    for match in matches:  
+        matched_content = match.group(0)  
+        content_inside_brackets = match.group(1)  
+        kv_item = content_inside_brackets.split('|')  
+        kv_item = [kv.strip() for kv in kv_item]  
+        kv_dict = {}  
+          
+        for kv in kv_item:  
+            k, v = kv.split(':')  
+            kv_dict[k.strip()] = v.strip().split(',')  
+        kv_list.append(kv_dict)  
+        updated_text = re.sub(re.escape(matched_content), '', updated_text)  
+      
+    return {"plain_text": updated_text, "reasoning_tuples": kv_list} 
+
+@app.route('/post/chat', methods=['POST'])  
+def generate_response():  
+    user_input = request.json.get('content')  
+    response = process_text(user_input)  
+    return jsonify(response)  
 
 if __name__ == "__main__":
     # app.register_blueprint(datatone_routes.datatone_bp, url_prefix='/datatone')
