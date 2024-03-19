@@ -32,3 +32,9 @@ declare interface HomeState {
   frontendMessages: Message[]
   messageIsStreaming: boolean
 }
+
+declare interface Node {
+  id: number
+  type: string
+  content: string
+}

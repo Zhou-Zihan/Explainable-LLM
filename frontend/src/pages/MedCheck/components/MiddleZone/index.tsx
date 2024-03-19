@@ -3,10 +3,10 @@ import { observer } from 'mobx-react'
 import { useStore } from '@/store/'
 import Card from '@/components/Card'
 import * as d3 from 'd3'
-import { Bezier } from 'bezier-js'
 import './index.less'
 
 import { Glyph } from '@/assets'
+import { fetchNodeInfo } from '@/api'
 
 const testReasoningTuples = [
   {
@@ -34,9 +34,6 @@ const xMap = {
   Complication: 560,
   Treatment: 560
 }
-
-const b = new Bezier(50, 100, 150, 50, 250, 150, 350, 100)
-console.log(b)
 
 const roundRectPath = (x_init, y, width, height, r, type) => {
   const x = x_init + xMap[type]
@@ -80,11 +77,27 @@ const rectFillColor = (type: string) => {
 
 const MiddleZone: FC = () => {
   const svgContainer = useRef(null)
-  const { curReasoningTuples } = useStore()
+  const { curReasoningTuples, curNodeList, setCurNodeList, curTopNodeIID, setCurTopNodeIID } =
+    useStore()
 
-  const [nodes, setNodes] = useState<any[]>([])
+  const [nodes, setNodes] = useState<Node[]>([])
   const [links, setLinks] = useState<any[]>([])
   const [nodeCoors, setNodeCoors] = useState<any[]>([])
+
+  const handleClickedNode = (selected_node: Node) => {
+    console.log('clicked node:', selected_node)
+    setCurTopNodeIID(selected_node.id)
+    // move the clicked node to the top
+    const topNode = curNodeList.find((node) => node.id === selected_node.id)
+    const remainingNodes = curNodeList.filter((node) => node.id !== selected_node.id)
+    remainingNodes.unshift(topNode)
+    setCurNodeList(remainingNodes)
+
+    fetchNodeInfo({ type: selected_node.type, content: selected_node.content }).then((res) => {
+      // TODO: api call to get the node infomation
+      console.log('node info:', res.data)
+    })
+  }
 
   const draw = () => {
     const svg = d3
@@ -118,6 +131,7 @@ const MiddleZone: FC = () => {
         .attr('stroke', rectFillColor(node.type))
         .attr('stroke-width', 2)
         .attr('id', `node-rect-${node.id}`)
+        .on('click', () => handleClickedNode(node))
 
       nodes_group
         .append('text')
@@ -128,6 +142,7 @@ const MiddleZone: FC = () => {
         .attr('font-family', 'Inria Sans')
         .text(node.content)
         .attr('id', `node-text-${node.id}`)
+        .on('click', () => handleClickedNode(node))
 
       if (node.type === 'Symptom') {
         nodes_type_count[0].push(node)
@@ -148,7 +163,6 @@ const MiddleZone: FC = () => {
       })
     })
 
-    console.log('nodeCoors:', nodeCoors)
     //draw links
     svg.selectAll('.links').remove()
     const links_group = svg.append('g').attr('class', 'links')
@@ -170,7 +184,7 @@ const MiddleZone: FC = () => {
         .append('circle')
         .attr('cx', sourceCoors.x + nodeWidth / 2)
         .attr('cy', sourceCoors.y)
-        .attr('r', 4)
+        .attr('r', 3)
         .attr('fill', 'white')
         .attr('stroke', '#113366')
         .attr('stroke-width', 2)
@@ -179,7 +193,7 @@ const MiddleZone: FC = () => {
         .append('circle')
         .attr('cx', targetCoors.x - nodeWidth / 2)
         .attr('cy', targetCoors.y)
-        .attr('r', 4)
+        .attr('r', 3)
         .attr('fill', 'white')
         .attr('stroke', '#113366')
         .attr('stroke-width', 2)
@@ -218,7 +232,9 @@ const MiddleZone: FC = () => {
       },
       [] as Array<{ id: number; type: string; content: string }>
     )
-    setNodes(node_list)
+    setNodes(node_list as Node[])
+    setCurNodeList(node_list as Node[])
+    setCurTopNodeIID(node_list[0].id)
 
     const link_list = []
     testReasoningTuples.forEach(

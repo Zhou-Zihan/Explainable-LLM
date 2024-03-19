@@ -63,6 +63,22 @@ class Store1 {
   setCurReasoningTuples = (reasoningTuples: any) => {
     this.curReasoningTuples = reasoningTuples
   }
+
+  @observable
+  curNodeList: Node[] = []
+
+  @action
+  setCurNodeList = (nodeList: Node[]) => {
+    this.curNodeList = nodeList
+  }
+
+  @observable
+  curTopNodeIID: number = null
+
+  @action
+  setCurTopNodeIID = (id: number) => {
+    this.curTopNodeIID = id
+  }
 }
 
 const store = new Store1()
