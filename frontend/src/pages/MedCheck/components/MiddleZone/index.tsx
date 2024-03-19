@@ -77,7 +77,7 @@ const rectFillColor = (type: string) => {
 
 const MiddleZone: FC = () => {
   const svgContainer = useRef(null)
-  const { curReasoningTuples, curNodeList, setCurNodeList, curTopNodeIID, setCurTopNodeIID } =
+  const { curReasoningTuples, curNodeIDList, setCurNodeIDList, curTopNodeIID, setCurTopNodeIID } =
     useStore()
 
   const [nodes, setNodes] = useState<Node[]>([])
@@ -88,13 +88,13 @@ const MiddleZone: FC = () => {
     console.log('clicked node:', selected_node)
     setCurTopNodeIID(selected_node.id)
     // move the clicked node to the top
-    const topNode = curNodeList.find((node) => node.id === selected_node.id)
-    const remainingNodes = curNodeList.filter((node) => node.id !== selected_node.id)
-    remainingNodes.unshift(topNode)
-    setCurNodeList(remainingNodes)
+    const remainingNodeIDs = curNodeIDList.filter((id) => id !== selected_node.id)
+    remainingNodeIDs.unshift(selected_node.id)
+    setCurNodeIDList(remainingNodeIDs)
 
     fetchNodeInfo({ type: selected_node.type, content: selected_node.content }).then((res) => {
       // TODO: api call to get the node infomation
+      // 收到数据后给加上id, type, content, definitions,
       console.log('node info:', res.data)
     })
   }
@@ -233,7 +233,7 @@ const MiddleZone: FC = () => {
       [] as Array<{ id: number; type: string; content: string }>
     )
     setNodes(node_list as Node[])
-    setCurNodeList(node_list as Node[])
+    setCurNodeIDList(node_list.map((node) => node.id))
     setCurTopNodeIID(node_list[0].id)
 
     const link_list = []

@@ -65,11 +65,11 @@ class Store1 {
   }
 
   @observable
-  curNodeList: Node[] = []
+  curNodeIDList: number[] = []
 
   @action
-  setCurNodeList = (nodeList: Node[]) => {
-    this.curNodeList = nodeList
+  setCurNodeIDList = (nodeList: number[]) => {
+    this.curNodeIDList = nodeList
   }
 
   @observable
@@ -78,6 +78,14 @@ class Store1 {
   @action
   setCurTopNodeIID = (id: number) => {
     this.curTopNodeIID = id
+  }
+
+  @observable
+  curRefInfoList: any[] = []
+
+  @action
+  setCurRefInfoList = (info: any[]) => {
+    this.curRefInfoList = info
   }
 }
 

@@ -38,3 +38,47 @@ declare interface Node {
   type: string
   content: string
 }
+
+declare interface RefInfo_Symptom {
+  id: number
+  type: string
+  content: string
+  definitions: string
+  relationship: { [key: string]: string[] }
+}
+
+declare interface RefInfo_Diagnosis {
+  id: number
+  type: string
+  content: string
+  definitions: string
+  relationship: { [key: string]: string[] }
+}
+
+declare interface DrugInteraction {
+  drug_inter: string
+  drug_name: string
+  detail_info: string
+}
+
+declare interface RefInfo_Treatment {
+  id: number
+  type: string
+  content: string
+  definitions: string
+  indications: string
+  related_product: string
+  adverse_effects: string
+  food_interactions: string
+  drug_interactions: DrugInteraction[]
+  contradictions: string
+  // relationship: { [key: string]: string[] }
+}
+
+declare interface RefInfo_Complication {
+  id: number
+  type: string
+  content: string
+  definitions: string
+  // relationship: { [key: string]: string[] }
+}
