@@ -6,9 +6,9 @@
 
 #### 参数格式
 
-| 参数项        | 格式    | 示例                |
-|------------|-------| ------------------- |
-| `content` | `str` | `I am a 32-year-old woman who came to the emergency department because of a 3-day history of worsening fever, dry cough, and shortness of breath. I also have had abdominal discomfort, diarrhea, and nausea, but I have not vomited. I wonder know what is the most appropriate intravenous pharmacotherapy at this time. (A) Cefuroxime alone (B) Cefuroxime and azithromycin (C) Levofloxacin alone (D) Levofloxacin and ticarcillin (E) Piperacillin-tazobactam` | 
+| 参数项    | 格式  | 示例                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| --------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `content` | `str` | `I am a 32-year-old woman who came to the emergency department because of a 3-day history of worsening fever, dry cough, and shortness of breath. I also have had abdominal discomfort, diarrhea, and nausea, but I have not vomited. I wonder know what is the most appropriate intravenous pharmacotherapy at this time. (A) Cefuroxime alone (B) Cefuroxime and azithromycin (C) Levofloxacin alone (D) Levofloxacin and ticarcillin (E) Piperacillin-tazobactam` |
 
 #### 备注
 
@@ -19,26 +19,26 @@
 ```json
 {
   "plain_text": "Given the patient's symptoms of fever, dry cough, and shortness of breath, along with abdominal discomfort, diarrhea, and nausea, the initial diagnosis points towards a respiratory infection with a possible complication involving the gastrointestinal system. The most appropriate intravenous pharmacotherapy in this case would be a combination of Levofloxacin and ticarcillin to target the respiratory infection and address the possible complications involving the gastrointestinal symptoms.So, the answer is (D) Levofloxacin and ticarcillin.",
-  "reasoning_tuples":[
+  "reasoning_tuples": [
     {
-      "Symptom":["Fever", "Dry Cough", "Shortness of Breath"],
-      "Diagnosis":"Respiratory Infection"
+      "Symptom": ["Fever", "Dry Cough", "Shortness of Breath"],
+      "Diagnosis": "Respiratory Infection"
     },
     {
-      "Symptom":["Fever", "Dry Cough", "Shortness of Breath"],
-      "Diagnosis":"Respiratory Infection",
-      "Complication":"Gastrointestinal Symptoms"
+      "Symptom": ["Fever", "Dry Cough", "Shortness of Breath"],
+      "Diagnosis": "Respiratory Infection",
+      "Complication": "Gastrointestinal Symptoms"
     },
     {
-      "Symptom":["Fever", "Dry Cough", "Shortness of Breath"],
-      "Diagnosis":"Respiratory Infection",
-      "Treatment-Medication":"Levofloxacin and ticarcillin"
+      "Symptom": ["Fever", "Dry Cough", "Shortness of Breath"],
+      "Diagnosis": "Respiratory Infection",
+      "Treatment-Medication": "Levofloxacin and ticarcillin"
     }
   ]
 }
 ```
 
-## 2. ChatView-选择USMLE题目作为对话内容
+## 2. ChatView-选择 USMLE 题目作为对话内容
 
 #### 接口
 
@@ -46,27 +46,26 @@
 
 #### 参数格式
 
-| 参数项        | 格式    | 示例                |
-|------------|-------| ------------------- |
-| `id` | `int` | `0` |
+| 参数项 | 格式  | 示例 |
+| ------ | ----- | ---- |
+| `key`  | `int` | `0`  |
 
 #### 备注
 
-从`/backend/database/usmle2022.json`和`/backend/database/usmle2022-segment.json`中按照id拿数据
-
+从`/backend/database/usmle2022.json`和`/backend/database/usmle2022-segment.json`中按照 id 拿数据
 
 #### 返回格式
 
 ```json
 {
-  "id": 0,
+  "key": 0,
   "question": "Which of the following microorganisms is most likely to have caused this patient's symptoms?",
   "options": [
-      "Adenovirus",
-      "Borrelia burgdorferi",
-      "Coxsackievirus",
-      "Ehrlichia chaffeensis",
-      "Parvovirus B19"
+    "Adenovirus",
+    "Borrelia burgdorferi",
+    "Coxsackievirus",
+    "Ehrlichia chaffeensis",
+    "Parvovirus B19"
   ],
   "segment": [
     {
@@ -105,7 +104,7 @@
 }
 ```
 
-## 3. LOAD CASES - 获取usmle中的所有题目
+## 3. LOAD CASES - 获取 usmle 中的所有题目
 
 #### 接口
 
@@ -119,8 +118,7 @@
 
 - 返回`/backend/database/usmle2022.json`文件内容
 
-
-## 4. Reference View - 获取node的信息
+## 4. Reference View - 获取 node 的信息
 
 #### 接口
 
@@ -128,25 +126,26 @@
 
 #### 参数格式
 
-| 参数项        | 格式    | 示例                |
-|------------|-------| ------------------- |
-| `type` | `str` | `Symptom`/`Diagnosis`/`Treatment`/`Complication` |
-|`content`|`str`|`Fever`|
+| 参数项    | 格式  | 示例                                             |
+| --------- | ----- | ------------------------------------------------ |
+| `type`    | `str` | `Symptom`/`Diagnosis`/`Treatment`/`Complication` |
+| `content` | `str` | `Fever`                                          |
 
 #### 备注
-UMLS接口描述：https://documentation.uts.nlm.nih.gov/rest/home.html
+
+UMLS 接口描述：https://documentation.uts.nlm.nih.gov/rest/home.html
 
 1. Type: Symptom
-   1. 通过UMLS接口，用content查询CUI的ID
-   2. 通过CUI-ID，查询`includeAdditionalRelationLabels=clinically_associated_with`相关的CUI-IDs，并获取CUI-IDs的名字
+   1. 通过 UMLS 接口，用 content 查询 CUI 的 ID
+   2. 通过 CUI-ID，查询`includeAdditionalRelationLabels=clinically_associated_with`相关的 CUI-IDs，并获取 CUI-IDs 的名字
 2. Type: Diagnosis
-   1. 通过UMLS接口，用content查询CUI的ID
-   2. 通过CUI-ID，查询`includeAdditionalRelationLabels=may_be_treated_by`相关的CUI-IDs，并获取CUI-IDs的名字
+   1. 通过 UMLS 接口，用 content 查询 CUI 的 ID
+   2. 通过 CUI-ID，查询`includeAdditionalRelationLabels=may_be_treated_by`相关的 CUI-IDs，并获取 CUI-IDs 的名字
 3. Type: Treatment
-   1. Medication类型的，通过本地数据库查询，用`content`在数据库中模糊搜索
+   1. Medication 类型的，通过本地数据库查询，用`content`在数据库中模糊搜索
 4. Type: Complication
-   1. 通过UMLS接口，用content查询CUI的ID
-   2. 通过CUI-ID获取基础信息
+   1. 通过 UMLS 接口，用 content 查询 CUI 的 ID
+   2. 通过 CUI-ID 获取基础信息
 
 #### 返回格式
 
@@ -192,13 +191,6 @@ UMLS接口描述：https://documentation.uts.nlm.nih.gov/rest/home.html
   "Definitions":"..."
 }
 ```
-
-
-
-
-
-
-
 
 <!-- ## 2. DrugBank数据库-药物信息查询
 

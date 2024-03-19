@@ -22,11 +22,36 @@ class Store1 {
   }
 
   @observable
-  curQuestionSegment: QuestionData = null
+  curQuestionData: QuestionData = null
 
   @action
-  setCurQuestionSegment = (data: QuestionData) => {
-    this.curQuestionSegment = data
+  setCurQuestionData = (data: QuestionData) => {
+    this.curQuestionData = data
+  }
+
+  @observable
+  homeState: HomeState = {
+    chatId: null,
+    // selectedChat: null,
+    chatList: [],
+    frontendMessages: [],
+    messageIsStreaming: false
+  }
+
+  @observable
+  messageIsStreaming = false
+
+  @action
+  setMessageIsStreaming = (value: boolean) => {
+    this.messageIsStreaming = value
+  }
+
+  @observable
+  frontendMessages: Message[] = []
+
+  @action
+  setFrontendMessages = (messages: Message[]) => {
+    this.frontendMessages = messages
   }
 }
 
