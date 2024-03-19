@@ -29,6 +29,7 @@ class Store1 {
     this.curQuestionData = data
   }
 
+  // not used
   @observable
   homeState: HomeState = {
     chatId: null,
@@ -37,6 +38,7 @@ class Store1 {
     frontendMessages: [],
     messageIsStreaming: false
   }
+  //
 
   @observable
   messageIsStreaming = false
@@ -52,6 +54,14 @@ class Store1 {
   @action
   setFrontendMessages = (messages: Message[]) => {
     this.frontendMessages = messages
+  }
+
+  @observable
+  curReasoningTuples: any = []
+
+  @action
+  setCurReasoningTuples = (reasoningTuples: any) => {
+    this.curReasoningTuples = reasoningTuples
   }
 }
 

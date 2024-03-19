@@ -10,6 +10,15 @@ declare interface QuestionData {
   segment: SegmentData[]
 }
 
+declare interface Chat {
+  chatId: string
+  title: string
+  model: string
+  temperature: number
+  createTime: string
+  backendMessages: []
+}
+
 declare interface Message {
   id: number
   parentId: number
