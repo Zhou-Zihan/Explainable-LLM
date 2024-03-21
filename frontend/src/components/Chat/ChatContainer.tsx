@@ -39,17 +39,17 @@ const ChatContainer: FC = () => {
   return (
     <div className="chat-view">
       <div className="chat-messages">
-        {testFrontendMessage &&
+        {/* {testFrontendMessage &&
           testFrontendMessage.length > 0 &&
           testFrontendMessage.map((message, index) => (
             <ChatMessage key={index} message={message} />
-          ))}
+          ))} */}
         {/* TODO: change after api is ready */}
-        {/* {frontendMessages &&
+        {frontendMessages &&
           frontendMessages.length > 0 &&
           frontendMessages.map((message, index) => (
             <ChatMessage key={index} message={message as Message} />
-          ))} */}
+          ))}
         {/* <div className="h-[160px]" ref={messagesEndRef} /> */}
       </div>
       <ChatInput />

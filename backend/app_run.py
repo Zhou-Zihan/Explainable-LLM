@@ -36,20 +36,25 @@ def init():
     return jsonify({"message": "init successfully"})
 
 
-def process_text(user_text):  
+def process_text(user_arr):  
     with open('system_prompt.txt') as f:
         system_prompt = f.read()
     with open('reply_prompt.txt') as f:
         reply_prompt = f.read()
 
+    prompt_arr = [{"role": item.get('role'), "content": item.get('content')} for item in user_arr]
+
     msg = [ 
-        {"role": "system", "content": "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Style your responses in Markdown."},
+        {"role": "system", "content": "You're an excellent doctor. Follow the user's instructions carefully. Style your responses in Markdown."},
         {"role": "user", "content": system_prompt},
         {"role": "assistant", "content": reply_prompt},
-        {"role": "user", "content": user_text},
+        # {"role": "user", "content": user_arr},
         # {"role": "assistant", "content": second_reply_prompt},
         # {"role": "user", "content": second_user_prompt}
     ]
+
+    msg = msg + prompt_arr
+    
     openai_response = openai.ChatCompletion.create(
         model='gpt-3.5-turbo',
         max_tokens=2048,
@@ -58,31 +63,31 @@ def process_text(user_text):
         # stream=True
     )
     generated_text = openai_response['choices'][0]['message']['content']
-    print(generated_text)
+
+    matches = re.findall(r'\{.*?\}', generated_text)
       
-    matches = re.finditer(r'\d+\) \((.*?)\)\n', generated_text)  
     updated_text = generated_text  
     kv_list = []  
   
-    for match in matches:  
-        matched_content = match.group(0)  
-        content_inside_brackets = match.group(1)  
-        kv_item = content_inside_brackets.split('|')  
-        kv_item = [kv.strip() for kv in kv_item]  
-        kv_dict = {}  
-          
-        for kv in kv_item:  
-            k, v = kv.split(':')  
-            kv_dict[k.strip()] = v.strip().split(',')  
+    for matched_content in matches:
+        kv_item_ls = json.loads(matched_content)
+        kv_dict = {}
+        for k, v in kv_item_ls.items():
+            cur_list = v.split(',')
+            cur_list = [item.strip() for item in cur_list]
+            kv_dict[k] = cur_list
+
         kv_list.append(kv_dict)  
+        
         updated_text = re.sub(re.escape(matched_content), '', updated_text)  
       
-    return {"plain_text": updated_text, "reasoning_tuples": kv_list} 
+    return {"plain_text": updated_text.strip(), "reasoning_tuples": kv_list} 
 
-@app.route('/post/chat', methods=['POST'])  
+@app.route('/chat', methods=['POST'])  
 def generate_response():  
-    user_input = request.json.get('content')  
-    response = process_text(user_input)  
+    user_input = request.json.get('dataset')  
+    print(user_input.get('content'))
+    response = process_text(user_input.get('content'))  
     return jsonify(response)  
 
 

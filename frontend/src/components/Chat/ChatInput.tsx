@@ -62,13 +62,16 @@ const ChatInput: FC = () => {
     curFrontendMessages.push({
       id: -1,
       parentId: parentId, // last message id
-      content: sendMessage,
+      content:
+        sendMessage +
+        'I wonder know what is the most appropriate intravenous pharmacotherapy at this time.\n (A) Cefuroxime alone \n(B) Cefuroxime and azithromycin \n(C) Levofloxacin alone \n(D) Levofloxacin and ticarcillin \n(E) Piperacillin-tazobactam',
+      // content: sendMessage,
       role: 'user'
     })
     setFrontendMessages(curFrontendMessages)
 
     try {
-      fetchChat({ content: sendMessage }).then((res) => {
+      fetchChat({ content: curFrontendMessages }).then((res) => {
         console.log('fetchChat', res)
         const data = res.data
         const newFrontendMessages = [...curFrontendMessages]
