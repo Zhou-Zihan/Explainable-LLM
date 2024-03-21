@@ -1,4 +1,5 @@
 import re
+import json
 import openai
 from flask import Flask, jsonify, request, Blueprint, render_template, abort, send_from_directory
 
@@ -49,7 +50,6 @@ def process_text(user_text):
         # {"role": "assistant", "content": second_reply_prompt},
         # {"role": "user", "content": second_user_prompt}
     ]
-    print(msg)
     openai_response = openai.ChatCompletion.create(
         model='gpt-3.5-turbo',
         max_tokens=2048,
@@ -84,6 +84,29 @@ def generate_response():
     user_input = request.json.get('content')  
     response = process_text(user_input)  
     return jsonify(response)  
+
+
+#TypeError: select_usmle_topic() missing 1 required positional argument: 'request'
+
+@app.route('/get/select_usmle_topic', methods=['GET'])
+def select_usmle_topic():
+    key = request.args.get('key')
+    key = int(key)
+    # 从/backend/database/usmle2022.json和/backend/database/usmle2022-segment.json中按照 id 拿数据
+    # 然后随机返回一个 topic
+    dict1 = json.load(open('database/usmle2022.json', 'r', encoding='utf-8'))
+    dict2 = json.load(open('database/usmle2022-segment.json', 'r', encoding='utf-8'))
+
+    ans = {}
+    ans.update(dict1[key])
+    ans.update(dict2[key])
+    del ans['question_stem']
+    return jsonify(ans)
+
+@app.route('/get/usmle_topics', methods=['GET'])
+def get_usmle_topics():
+    data = json.load(open('database/usmle2022.json', 'r', encoding='utf-8'))
+    return jsonify(data)
 
 if __name__ == "__main__":
     # app.register_blueprint(datatone_routes.datatone_bp, url_prefix='/datatone')
