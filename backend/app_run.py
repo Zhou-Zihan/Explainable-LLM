@@ -54,7 +54,7 @@ def process_text(user_arr):
     ]
 
     msg = msg + prompt_arr
-    
+
     openai_response = openai.ChatCompletion.create(
         model='gpt-3.5-turbo',
         max_tokens=2048,
@@ -93,9 +93,9 @@ def generate_response():
 
 #TypeError: select_usmle_topic() missing 1 required positional argument: 'request'
 
-@app.route('/get/select_usmle_topic', methods=['GET'])
+@app.route('/select_usmle_topic', methods=['GET'])
 def select_usmle_topic():
-    key = request.args.get('key')
+    key = request.args.get('dataset')
     key = int(key)
     # 从/backend/database/usmle2022.json和/backend/database/usmle2022-segment.json中按照 id 拿数据
     # 然后随机返回一个 topic
@@ -108,7 +108,7 @@ def select_usmle_topic():
     del ans['question_stem']
     return jsonify(ans)
 
-@app.route('/get/usmle_topics', methods=['GET'])
+@app.route('/usmle', methods=['GET'])
 def get_usmle_topics():
     data = json.load(open('database/usmle2022.json', 'r', encoding='utf-8'))
     return jsonify(data)
