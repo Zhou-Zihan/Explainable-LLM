@@ -6,6 +6,7 @@ import Card from '@/components/Card'
 import './index.less'
 import { Collapse } from 'antd'
 import CollapseCotent from '@/components/CollapseCard'
+import DrawSvgContainer from '@/components/DrawSvgContainer'
 
 const { Panel } = Collapse
 
@@ -92,6 +93,7 @@ const RightZone: FC = () => {
                 return (
                   <Panel header={refInfo.type + ': ' + refInfo.content} key={refInfo.id}>
                     <CollapseCotent refInfo={refInfo} />
+                    <DrawSvgContainer refInfo={refInfo}/>
                   </Panel>
                 )
               })}

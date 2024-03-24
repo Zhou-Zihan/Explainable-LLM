@@ -19,11 +19,15 @@ interface RefInfo {
 const CollapseCotent_Symptom: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
   return (
     <div className="refInfo" key={refInfo.id}>
-      <p>Definitions: {refInfo.definitions}</p>
-      <p>
-        Relationship View: edge means {refInfo.content} is clinically associated with B(Diagnosis
-        Type).
-      </p>
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">Definitions:</p>
+        <p> {refInfo.definitions}</p>
+      </div>
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">Relationship View:</p>
+        <p> edge means {refInfo.content} is clinically associated with B(Diagnosis
+        Type).</p>
+      </div>
     </div>
   )
 }
@@ -31,11 +35,15 @@ const CollapseCotent_Symptom: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
 const CollapseCotent_Diagnosis: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
   return (
     <div className="refInfo" key={refInfo.id}>
-      <p>Definitions: {refInfo.definitions}</p>
-      <p>
-        Relationship View: edge means A(Symptom Type) is clinically associated with{' '}
-        {refInfo.content}, or {refInfo.content} may be treated by B(Drug Type).
-      </p>
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">Definitions:</p>
+        <p> {refInfo.definitions}</p>
+      </div>
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">Relationship View:</p>
+        <p> edge means A(Symptom Type) is clinically associated with{' '}
+        {refInfo.content}, or {refInfo.content} may be treated by B(Drug Type).</p>
+      </div>
     </div>
   )
 }
@@ -43,8 +51,13 @@ const CollapseCotent_Diagnosis: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
 const CollapseCotent_Complication: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
   return (
     <div className="refInfo" key={refInfo.id}>
-      <p>Definitions: {refInfo.definitions}</p>
-      <p>Relationship View:</p>
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">Definitions:</p>
+        <p> {refInfo.definitions}</p>
+      </div>
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">Relationship View:</p>
+      </div>
     </div>
   )
 }
@@ -52,15 +65,32 @@ const CollapseCotent_Complication: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
 const CollapseCotent_Treatment: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
   return (
     <div className="refInfo" key={refInfo.id}>
-      <p>Definitions: {refInfo.definitions}</p>
-      <p>Indication: {refInfo.Indication}</p>
-      <p>⚠️ 🍴 Notice: {refInfo.Food_Interaction}</p>
-
-      <p>Related Products: {refInfo.Related_Product}</p>
-      <p>Adverse Effects: {refInfo.Adverse_Effects}</p>
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">Definitions:</p>
+        <p> {refInfo.definitions}</p>
+      </div>
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">Indication:</p>
+        <p> {refInfo.Indication}</p>
+      </div>
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">⚠️ 🍴 Notice:</p>
+        <p> {refInfo.Food_Interaction}</p>
+      </div>
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">Related Products:</p>
+        <p> {refInfo.Related_Product}</p>
+      </div>
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">Adverse Effects:</p>
+        <p> {refInfo.Adverse_Effects}</p>
+      </div>
       {/* <p>Contradictions: {refInfo.contradictions}</p> */}
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">Relationship View:</p>
+        <p> edge means A(Diagnosis Type) may be treated by {refInfo.content}.</p>
+      </div>
 
-      <p>Relationship View: edge means A(Diagnosis Type) may be treated by {refInfo.content}.</p>
     </div>
   )
 }
