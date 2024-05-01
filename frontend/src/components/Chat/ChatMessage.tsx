@@ -10,7 +10,7 @@ interface ChatMessageProps {
 }
 
 const ChatMessage: FC<ChatMessageProps> = (props) => {
-  console.log(props.message)
+  console.log("props.message:",props.message)
   const message = props.message
   return (
     <div className={message.role == 'user' ? 'message-container-reverse' : 'message-container'}>

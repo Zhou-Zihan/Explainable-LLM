@@ -5,6 +5,7 @@ import './index.less';
 import { useStore } from '@/store/'
 import { Glyph } from '@/assets'
 import { fetchNodeInfo } from '@/api'
+import { Dropdown, message } from 'antd'
 
 const testReasoningTuples = [
   {
@@ -389,6 +390,16 @@ const DrawSvgContainer: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
 
   useEffect(() => {
     mydraw()
+    try {
+      fetchNodeInfo({ date: "Fever" }).then((res) => {
+        console.log('fetchChat', res)
+        console.log('33333')
+      })
+    } catch (err) {
+      message.error('ooooooooooooOops! Something went wrong.')
+      console.log('555333')
+
+    }
   },[translateY])
 
   console.log("translateY:",translateY)

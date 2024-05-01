@@ -8,7 +8,7 @@ import './index.less'
 
 const ChatContainer: FC = () => {
   const { frontendMessages } = useStore()
-
+  console.log("frontendMessages",frontendMessages)
   // // Scroll to the bottom of the chat
   // const messagesEndRef = useRef<HTMLDivElement>(null)
 

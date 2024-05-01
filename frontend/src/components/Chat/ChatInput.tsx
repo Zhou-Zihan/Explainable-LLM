@@ -28,6 +28,7 @@ const ChatInput: FC = () => {
   // TODO: Change into Cascading menu, following 'medical history / physical examination'
   useEffect(() => {
     if (curQuestionData) {
+      console.log("curQuestionData:",curQuestionData)
       setSegments(curQuestionData.segment)
       const result = curQuestionData.segment.map((segmentData, index) => {
         return {
@@ -37,6 +38,7 @@ const ChatInput: FC = () => {
         }
       })
       setItems(result)
+      console.log("result",result)
     }
   }, [curQuestionData])
 
@@ -63,16 +65,16 @@ const ChatInput: FC = () => {
       id: -1,
       parentId: parentId, // last message id
       content:
-        sendMessage +
-        'I wonder know what is the most appropriate intravenous pharmacotherapy at this time.\n (A) Cefuroxime alone \n(B) Cefuroxime and azithromycin \n(C) Levofloxacin alone \n(D) Levofloxacin and ticarcillin \n(E) Piperacillin-tazobactam',
-      // content: sendMessage,
+        sendMessage ,//+
+        //'I wonder know what is the most appropriate intravenous pharmacotherapy at this time.\n (A) Cefuroxime alone \n(B) Cefuroxime and azithromycin \n(C) Levofloxacin alone \n(D) Levofloxacin and ticarcillin \n(E) Piperacillin-tazobactam',
+      // content: sendMessage,要改
       role: 'user'
     })
     setFrontendMessages(curFrontendMessages)
 
     try {
       fetchChat({ content: curFrontendMessages }).then((res) => {
-        console.log('fetchChat', res)
+        console.log('fetchChat', res)//no
         const data = res.data
         const newFrontendMessages = [...curFrontendMessages]
         newFrontendMessages[newFrontendMessages.length - 1] = {
@@ -102,7 +104,7 @@ const ChatInput: FC = () => {
 
   const onClick = ({ key }) => {
     message.info(`Click on item ${key}`)
-    console.log(segments[parseInt(key)].description)
+    console.log('description:',segments[parseInt(key)].description)
     setSendMessage(segments[parseInt(key)].description)
   }
 

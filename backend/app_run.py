@@ -44,9 +44,9 @@ def init():
 
 
 def process_text(user_arr):  
-    with open('system_prompt.txt') as f:
+    with open('system_prompt.txt', 'r', encoding='utf-8') as f:
         system_prompt = f.read()
-    with open('reply_prompt.txt') as f:
+    with open('reply_prompt.txt', 'r', encoding='utf-8') as f:
         reply_prompt = f.read()
 
     prompt_arr = [{"role": item.get('role'), "content": item.get('content')} for item in user_arr]
