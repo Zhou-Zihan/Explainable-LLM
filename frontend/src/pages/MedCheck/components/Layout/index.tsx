@@ -81,7 +81,7 @@ const Layout: FC = () => {
     }
   }
 
-  // TODO: Delete after api is ready
+
   // setCurQuestionData({
   //   id: 115,
   //   question:
@@ -153,7 +153,6 @@ const Layout: FC = () => {
           >
             <Card>
               <Table
-                //TODO: Wait for api to return data
                 dataSource={curDataset}
                 // dataSource={testData}
                 columns={testColumns}

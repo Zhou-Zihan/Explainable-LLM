@@ -24,6 +24,10 @@ const CollapseCotent_Symptom: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
         <p> {refInfo.definitions}</p>
       </div>
       <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">clinically_associated_with:</p>
+        <p> {refInfo.relationship?.clinically_associated_with?.join(" ; ")}</p>
+      </div>
+      <div className="CollapseCotent_description">
         <p className="CollapseCotent_title">Relationship View:</p>
         <p> edge means {refInfo.content} is clinically associated with B(Diagnosis
         Type).</p>
@@ -38,6 +42,10 @@ const CollapseCotent_Diagnosis: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
       <div className="CollapseCotent_description">
         <p className="CollapseCotent_title">Definitions:</p>
         <p> {refInfo.definitions}</p>
+      </div>
+      <div className="CollapseCotent_description">
+        <p className="CollapseCotent_title">may_be_treated_by:</p>
+        <p> {refInfo.relationship?.may_be_treated_by?.join(" ; ")}</p>
       </div>
       <div className="CollapseCotent_description">
         <p className="CollapseCotent_title">Relationship View:</p>

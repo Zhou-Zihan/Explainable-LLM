@@ -3,14 +3,12 @@ Your task is to make medical reasoning based on the patient's description, notin
 We define the possible reasoning step:
 {"Symptom":"xxxx","Diagnosis":"xxxx"}，
 {"Symptom":"xxxx","Diagnosis":"xxxx","Complication":"xxxx"}
-{"Symptom":"xxxx","Diagnosis":"xxxx","Treatment-Medication":"xxxx"}
-{"Symptom":"xxxx","Diagnosis":"xxxx","Treatment-Examination":"xxxx"}
-{"Symptom":"xxxx","Diagnosis":"xxxx","Treatment-Other":"xxxx"}
+{"Symptom":"xxxx","Diagnosis":"xxxx","Treatment":"xxxx"}
 {"Diagnosis":"xxxx","Complication":"xxxx"}
-{"Diagnosis":"xxxx","Treatment-Medication":"xxxx"}
-{"Diagnosis":"xxxx","Treatment-Examination":"xxxx"}
-{"Diagnosis":"xxxx","Treatment-Other":"xxxx"}
+{"Diagnosis":"xxxx","Treatment":"xxxx"}
 
 Your reasoning must contain one or more types of reasoning step. 
+Please make sure that your reasoning words are medical, formal, standardized, short and brief.
+In the reasoning step, "Treatment" should be methods or rigorous drug names.
 After patients giving more information, you should consider it much more fully and then update the reasoning step.
 You should output the reasoning step in exactly the same format mentioned before.

@@ -7,22 +7,22 @@ import { Glyph } from '@/assets'
 import { fetchNodeInfo } from '@/api'
 import { Dropdown, message } from 'antd'
 
-const testReasoningTuples = [
-  {
-    Symptom: ['Fever', 'Dry Cough', 'Shortness of Breath'],
-    Diagnosis: 'Respiratory Infection'
-  },
-  {
-    Symptom: ['Fever', 'Dry Cough', 'Shortness of Breath'],
-    Diagnosis: 'Respiratory Infection',
-    Complication: 'Gastrointestinal Symptoms'
-  },
-  {
-    Symptom: ['Fever', 'Dry Cough', 'Shortness of Breath'],
-    Diagnosis: 'Respiratory Infection',
-    Treatment: 'Levofloxacin and ticarcillin'
-  }
-]
+// const testReasoningTuples = [
+//   {
+//     Symptom: ['Fever', 'Dry Cough', 'Shortness of Breath'],
+//     Diagnosis: 'Respiratory Infection'
+//   },
+//   {
+//     Symptom: ['Fever', 'Dry Cough', 'Shortness of Breath'],
+//     Diagnosis: 'Respiratory Infection',
+//     Complication: 'Gastrointestinal Symptoms'
+//   },
+//   {
+//     Symptom: ['Fever', 'Dry Cough', 'Shortness of Breath'],
+//     Diagnosis: 'Respiratory Infection',
+//     Treatment: 'Levofloxacin and ticarcillin'
+//   }
+// ]
 
 interface RefInfo {
   id: number
@@ -35,7 +35,7 @@ interface RefInfo {
   Related_Product?: string
   Adverse_Effects?: string
   Food_Interaction?: string
-}//api之后再改，先用假数据
+}
 
 const middlePosition = 120//?
 const nodeWidth = 200
@@ -100,7 +100,8 @@ const DrawSvgContainer: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
   const [nodeCoors, setNodeCoors] = useState<any[]>([])
   const [nodesnew, setNodesnew] = useState<Node[]>([])
   const [translateY, settranslateY] = useState<any[]>([])
-
+  const {curReasoningTuples} =
+    useStore()
   const mainType=refInfo.type
   const mainContent=refInfo.content
   const mainId=refInfo.id
@@ -249,9 +250,10 @@ const DrawSvgContainer: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
   }
 
   useEffect(() => {
+    if(curReasoningTuples!=''){
     let id = 0
     const contentSet = new Set()
-    const node_list = testReasoningTuples.reduce(
+    const node_list = curReasoningTuples.reduce(
       (acc, obj) => {
         Object.entries(obj).forEach(([type, contents]) => {
           if (Array.isArray(contents)) {
@@ -281,7 +283,7 @@ const DrawSvgContainer: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
     setNodes(node_list as Node[])
 
     const link_list = []
-    testReasoningTuples.forEach(
+    curReasoningTuples.forEach(
       (obj) => {
         const keys = Object.keys(obj)
 
@@ -345,8 +347,8 @@ const DrawSvgContainer: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
     )
     console.log('node list:', node_list, 'link list:', unique_link_list)
     setLinks(unique_link_list)
-
-  }, [testReasoningTuples])
+  }
+  }, [curReasoningTuples])
 
   useEffect(() => {
     mynodes.forEach((node, idx) => {
@@ -390,16 +392,6 @@ const DrawSvgContainer: FC<{ refInfo: RefInfo }> = ({ refInfo }) => {
 
   useEffect(() => {
     mydraw()
-    try {
-      fetchNodeInfo({ date: "Fever" }).then((res) => {
-        console.log('fetchChat', res)
-        console.log('33333')
-      })
-    } catch (err) {
-      message.error('ooooooooooooOops! Something went wrong.')
-      console.log('555333')
-
-    }
   },[translateY])
 
   console.log("translateY:",translateY)

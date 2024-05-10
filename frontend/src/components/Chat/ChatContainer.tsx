@@ -21,20 +21,20 @@ const ChatContainer: FC = () => {
   //   scrollDown()
   // }, [frontendMessages])
 
-  const testFrontendMessage = [
-    {
-      id: 0,
-      parentId: -1,
-      content: 'skajhdaskhdaksjdhkadhka',
-      role: 'assistent'
-    },
-    {
-      id: 1,
-      parentId: 0,
-      content: 'skajhdaskhdaksjdhkadhka',
-      role: 'user'
-    }
-  ]
+  // const testFrontendMessage = [
+  //   {
+  //     id: 0,
+  //     parentId: -1,
+  //     content: 'skajhdaskhdaksjdhkadhka',
+  //     role: 'assistent'
+  //   },
+  //   {
+  //     id: 1,
+  //     parentId: 0,
+  //     content: 'skajhdaskhdaksjdhkadhka',
+  //     role: 'user'
+  //   }
+  // ]
 
   return (
     <div className="chat-view">
@@ -44,7 +44,6 @@ const ChatContainer: FC = () => {
           testFrontendMessage.map((message, index) => (
             <ChatMessage key={index} message={message} />
           ))} */}
-        {/* TODO: change after api is ready */}
         {frontendMessages &&
           frontendMessages.length > 0 &&
           frontendMessages.map((message, index) => (

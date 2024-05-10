@@ -28,7 +28,7 @@ for idx in range(0, len):
 
     output.append(item)
 
-# with open('../usmle2022.json', 'w', encoding='utf-8') as json_file:
-#     json.dump(output, json_file, ensure_ascii=False, indent=4)
+with open('../temp.json', 'w', encoding='utf-8') as json_file:
+    json.dump(output, json_file, ensure_ascii=False, indent=4)
 
 print("saved.")

@@ -8,25 +8,37 @@ import './index.less'
 import { Glyph } from '@/assets'
 import { fetchNodeInfo } from '@/api'
 
-const testReasoningTuples = [
-  {
-    Symptom: ['Fever', 'Dry Cough', 'Shortness of Breath'],
-    Diagnosis: 'Respiratory Infection'
-  },
-  {
-    Symptom: ['Fever', 'Dry Cough', 'Shortness of Breath'],
-    Diagnosis: 'Respiratory Infection',
-    Complication: 'Gastrointestinal Symptoms'
-  },
-  {
-    Symptom: ['Fever', 'Dry Cough', 'Shortness of Breath'],
-    Diagnosis: 'Respiratory Infection',
-    Treatment: 'Levofloxacin and ticarcillin'
-  }
-]
+// const testReasoningTuples = [
+//   {
+//     Symptom: ['Fever', 'Dry Cough', 'Shortness of Breath'],
+//     Diagnosis: 'Respiratory Infection'
+//   },
+//   {
+//     Symptom: ['Fever', 'Dry Cough', 'Shortness of Breath'],
+//     Diagnosis: 'Respiratory Infection',
+//     Complication: 'Gastrointestinal Symptoms'
+//   },
+//   {
+//     Symptom: ['Fever', 'Dry Cough', 'Shortness of Breath'],
+//     Diagnosis: 'Respiratory Infection',
+//     Treatment: 'Levofloxacin and ticarcillin'
+//   }
+// ]
+interface RefInfo {
+  id: number
+  type: string
+  content: string
+  definitions: string
+  relationship?: { [key: string]: string[] }
+  Indication?: string
+  Drug_Interaction?: DrugInteraction[]
+  Related_Product?: string
+  Adverse_Effects?: string
+  Food_Interaction?: string
+}
 
 const middlePosition = 360
-const nodeWidth = 220
+const nodeWidth = 250
 const nodeHeight = 40
 const xMap = {
   Symptom: 20,
@@ -77,12 +89,13 @@ const rectFillColor = (type: string) => {
 
 const MiddleZone: FC = () => {
   const svgContainer = useRef(null)
-  const { curReasoningTuples, curNodeIDList, setCurNodeIDList, curTopNodeIID, setCurTopNodeIID } =
+  const {curReasoningTuples, curNodeIDList, setCurNodeIDList, curTopNodeIID, setCurTopNodeIID } =
     useStore()
-
+  const {curRefInfoList,setCurRefInfoList } = useStore()
   const [nodes, setNodes] = useState<Node[]>([])
   const [links, setLinks] = useState<any[]>([])
   const [nodeCoors, setNodeCoors] = useState<any[]>([])
+  const [positionY, setPositionY] = useState<any[]>([])
 
   const handleClickedNode = (selected_node: Node) => {
     console.log('clicked node:', selected_node)
@@ -93,9 +106,12 @@ const MiddleZone: FC = () => {
     setCurNodeIDList(remainingNodeIDs)
 
     fetchNodeInfo({ type: selected_node.type, content: selected_node.content }).then((res) => {
-      // TODO: api call to get the node infomation
-      // 收到数据后给加上id, type, content, definitions,
-      console.log('node info:', res.data)
+      const data = res.data
+      if(!curRefInfoList.find((RefInfo)=>RefInfo.id==selected_node.id)){
+        curRefInfoList.push({id:selected_node.id, type:selected_node.type,content:selected_node.content,definitions:data.Definitions,relationship:data.Relationship})
+      }
+      console.log('data:', data)
+      console.log("curRefInfoList:",curRefInfoList)
     })
   }
 
@@ -117,7 +133,7 @@ const MiddleZone: FC = () => {
     // draw nodes
     svg.selectAll('.nodes').remove()
     const nodes_group = svg.append('g').attr('class', 'nodes')
-    const nodes_type_count = [[], [], []]
+
 
     nodes.forEach((node, idx) => {
       nodes_group
@@ -144,23 +160,20 @@ const MiddleZone: FC = () => {
         .attr('id', `node-text-${node.id}`)
         .on('click', () => handleClickedNode(node))
 
-      if (node.type === 'Symptom') {
-        nodes_type_count[0].push(node)
-      } else if (node.type === 'Diagnosis') {
-        nodes_type_count[1].push(node)
-      } else {
-        nodes_type_count[2].push(node)
-      }
-    })
 
-    // node y-transfer
-    nodes_type_count.forEach((nodes, idx) => {
-      nodes.forEach((node, idx) => {
-        const y = generateYTransform(nodes.length, idx)
-        d3.selectAll(`#node-rect-${node.id}`).attr('transform', `translate(0, ${y})`)
-        d3.selectAll(`#node-text-${node.id}`).attr('transform', `translate(0, ${y})`)
-        nodeCoors.push({ id: node.id, x: xMap[node.type] + nodeWidth / 2, y: middlePosition + y })
+      let y
+      positionY.forEach((position,idx)=>{
+        if(node.id==position.id)
+        y=position.yposition
       })
+      console.log("node.id",node.id,"y",y)
+      // if(y){
+      d3.selectAll(`#node-rect-${node.id}`).attr('transform', `translate(0, ${y})`)
+      d3.selectAll(`#node-text-${node.id}`).attr('transform', `translate(0, ${y})`)
+      // }
+
+    nodeCoors.push({ id: node.id, x: xMap[node.type] + nodeWidth / 2, y: middlePosition + y })
+
     })
 
     //draw links
@@ -170,7 +183,8 @@ const MiddleZone: FC = () => {
     links.forEach((link) => {
       const sourceCoors = nodeCoors.find((node) => node.id === link.sourceID)
       const targetCoors = nodeCoors.find((node) => node.id === link.targetID)
-
+      console.log("link",link)
+      console.log("sourceCoors:",sourceCoors,"targetCoors:",targetCoors)
       links_group
         .append('path')
         .attr('d', generateLinkPath(sourceCoors, targetCoors))
@@ -201,112 +215,149 @@ const MiddleZone: FC = () => {
   }
 
   // node&link detect
-  // TODO: Change testReasoningTuples to curReasoningTuples after api is ready
   useEffect(() => {
-    let id = 0
-    const contentSet = new Set()
-    const node_list = testReasoningTuples.reduce(
-      (acc, obj) => {
-        Object.entries(obj).forEach(([type, contents]) => {
-          if (Array.isArray(contents)) {
-            contents.forEach((content) => {
-              const entry = { type, content }
+    if(curReasoningTuples!=''){
+      let id = 0
+      const contentSet = new Set()
+      const node_list = curReasoningTuples.reduce(
+      // const node_list = testReasoningTuples.reduce(
+        (acc, obj) => {
+          Object.entries(obj).forEach(([type, contents]) => {
+            if (Array.isArray(contents)) {
+              contents.forEach((content) => {
+                const entry = { type, content }
+                const key = JSON.stringify(entry)
+                if (!contentSet.has(key)) {
+                  contentSet.add(key)
+                  acc.push({ id, type, content })
+                  id++
+                }
+              })
+            } else {
+              const entry = { type, content: contents }
               const key = JSON.stringify(entry)
               if (!contentSet.has(key)) {
                 contentSet.add(key)
-                acc.push({ id, type, content })
+                acc.push({ id, type, content: contents })
                 id++
               }
-            })
-          } else {
-            const entry = { type, content: contents }
-            const key = JSON.stringify(entry)
-            if (!contentSet.has(key)) {
-              contentSet.add(key)
-              acc.push({ id, type, content: contents })
-              id++
             }
-          }
-        })
-        return acc
-      },
-      [] as Array<{ id: number; type: string; content: string }>
-    )
-    setNodes(node_list as Node[])
-    setCurNodeIDList(node_list.map((node) => node.id))
-    setCurTopNodeIID(node_list[0].id)
+          })
+          return acc
+        },
+        [] as Array<{ id: number; type: string; content: string }>
+      )
+      setNodes(node_list as Node[])
+      setCurNodeIDList(node_list.map((node) => node.id))
+      setCurTopNodeIID(node_list[0].id)
 
-    const link_list = []
-    testReasoningTuples.forEach(
-      (obj) => {
-        const keys = Object.keys(obj)
+      const link_list = []
+      console.log("CurReasoningTuples:",curReasoningTuples)
+      // testReasoningTuples.forEach(
+      curReasoningTuples.forEach(
+        (obj) => {
+          const keys = Object.keys(obj)
+          for (let i = 0; i < keys.length - 1; i++) {
+            let sid=i
+            let tid=i+1
+            if(keys[i]=="Diagnosis"&&keys[i+1]=="Symptom"||keys[i]=="Complication"&&keys[i+1]=="Diagnosis"){
+              sid=i+1
+              tid=i
+            }
+            const source = obj[keys[sid]]
+            const target = obj[keys[tid]]
 
-        for (let i = 0; i < keys.length - 1; i++) {
-          const source = obj[keys[i]]
-          const target = obj[keys[i + 1]]
-
-          if (Array.isArray(source)) {
-            if (Array.isArray(target)) {
-              source.forEach((s) => {
+            if (Array.isArray(source)) {
+              if (Array.isArray(target)) {
+                source.forEach((s) => {
+                  target.forEach((t) => {
+                    link_list.push({
+                      sourceID: node_list.find((node) => node.type === keys[sid] && node.content === s)
+                        .id,
+                      targetID: node_list.find(
+                        (node) => node.type === keys[tid] && node.content === t
+                      ).id
+                    })
+                  })
+                })
+              } else {
+                const targetid = node_list.find(
+                  (node) => node.type === keys[tid] && node.content === target
+                ).id
+                source.forEach((s) => {
+                  link_list.push({
+                    sourceID: node_list.find((node) => node.type === keys[sid] && node.content === s)
+                      .id,
+                    targetID: targetid
+                  })
+                })
+              }
+            } else {
+              const sourceid = node_list.find(
+                (node) => node.type === keys[sid] && node.content === source
+              ).id
+              if (Array.isArray(target)) {
                 target.forEach((t) => {
                   link_list.push({
-                    sourceID: node_list.find((node) => node.type === keys[i] && node.content === s)
-                      .id,
+                    sourceID: sourceid,
                     targetID: node_list.find(
-                      (node) => node.type === keys[i + 1] && node.content === t
+                      (node) => node.type === keys[tid] && node.content === t
                     ).id
                   })
                 })
-              })
-            } else {
-              const targetid = node_list.find(
-                (node) => node.type === keys[i + 1] && node.content === target
-              ).id
-              source.forEach((s) => {
-                link_list.push({
-                  sourceID: node_list.find((node) => node.type === keys[i] && node.content === s)
-                    .id,
-                  targetID: targetid
-                })
-              })
-            }
-          } else {
-            const sourceid = node_list.find(
-              (node) => node.type === keys[i] && node.content === source
-            ).id
-            if (Array.isArray(target)) {
-              target.forEach((t) => {
+              } else {
                 link_list.push({
                   sourceID: sourceid,
                   targetID: node_list.find(
-                    (node) => node.type === keys[i + 1] && node.content === t
+                    (node) => node.type === keys[tid] && node.content === target
                   ).id
                 })
-              })
-            } else {
-              link_list.push({
-                sourceID: sourceid,
-                targetID: node_list.find(
-                  (node) => node.type === keys[i + 1] && node.content === target
-                ).id
-              })
+              }
             }
           }
-        }
-      },
-      [] as Array<{ source: number; target: number }>
-    )
-    const unique_link_list = Array.from(new Set(link_list.map((link) => JSON.stringify(link)))).map(
-      (link) => JSON.parse(link as string)
-    )
-    console.log('node list:', node_list, 'link list:', unique_link_list)
-    setLinks(unique_link_list)
-  }, [testReasoningTuples])
+        },
+        [] as Array<{ source: number; target: number }>
+      )
+      const unique_link_list = Array.from(new Set(link_list.map((link) => JSON.stringify(link)))).map(
+        (link) => JSON.parse(link as string)
+      )
+      console.log('node list:', node_list, 'link list:', unique_link_list)
+      setLinks(unique_link_list)
+    }
+  // }, [testReasoningTuples])
+  }, [curReasoningTuples])
+
+  useEffect(() => {
+    const nodes_type_count = [[], [], []]
+    nodes.forEach((node, idx) => {
+      if (node.type === 'Symptom') {
+        nodes_type_count[0].push(node)
+      } else if (node.type === 'Diagnosis') {
+        nodes_type_count[1].push(node)
+      } else {
+        nodes_type_count[2].push(node)
+      }
+    })
+    nodes_type_count.forEach((nodes, idx) => {
+      nodes.forEach((node, idx) => {
+        const tempy = generateYTransform(nodes.length, idx)
+        addNodePosition(node.id,tempy)
+      })
+    })
+  }, [nodes, links])
+
+  const addNodePosition = (nodeId: number, tempy: number) => {
+    setPositionY(prevState => [
+      ...prevState,
+      { id: nodeId, yposition: tempy }
+    ]);
+  };
 
   useEffect(() => {
     draw()
-  }, [nodes, links])
+  },[positionY])
 
+  console.log("!!PositionY:",positionY)
   return (
     <div className="middle-zone">
       <Card title="Illustration View" className="chart-view-card">

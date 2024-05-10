@@ -16,7 +16,8 @@ const ChatInput: FC = () => {
   const [sendMessage, setSendMessage] = useState('')
   const [segments, setSegments] = useState<SegmentData[]>([])
   const [items, setItems] = useState<{ label: string; key: string }[]>([])
-
+  const {curReasoningTuples ,setCurReasoningTuples } =
+    useStore()
   const {
     curQuestionData,
     messageIsStreaming,
@@ -38,7 +39,7 @@ const ChatInput: FC = () => {
         }
       })
       setItems(result)
-      console.log("result",result)
+      console.log("result:",result)
     }
   }, [curQuestionData])
 
@@ -62,7 +63,7 @@ const ChatInput: FC = () => {
     const parentId =
       frontendMessages.length > 0 ? frontendMessages[frontendMessages.length - 1].id : -1
     curFrontendMessages.push({
-      id: -1,
+      id: parentId+1,
       parentId: parentId, // last message id
       content:
         sendMessage ,//+
@@ -74,7 +75,7 @@ const ChatInput: FC = () => {
 
     try {
       fetchChat({ content: curFrontendMessages }).then((res) => {
-        console.log('fetchChat', res)//no
+        console.log('fetchChat', res)
         const data = res.data
         const newFrontendMessages = [...curFrontendMessages]
         newFrontendMessages[newFrontendMessages.length - 1] = {
@@ -93,7 +94,8 @@ const ChatInput: FC = () => {
         })
         curFrontendMessages = [...newFrontendMessages]
         setFrontendMessages(newFrontendMessages)
-        // TODO: use data.reasoning_tuples to update the state
+        setCurReasoningTuples(data.reasoning_tuples)
+        // console.log("CurReasoningTuples:",curReasoningTuples)
       })
     } catch (err) {
       message.error('Oops! Something went wrong.')

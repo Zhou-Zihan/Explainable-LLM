@@ -1,7 +1,7 @@
 import os
 import re
 import json
-import openai
+from openai import OpenAI
 import sqlite3  
 import requests
 from fuzzywuzzy import process  
@@ -9,8 +9,11 @@ from flask import Flask, jsonify, request, Blueprint, render_template, abort, se
 from dotenv import load_dotenv
 load_dotenv()
 
-openai.api_key = os.getenv('OPENAI_API_KEY')
-openai.api_base = os.getenv('OPENAI_API_BASE')
+os.environ["OPENAI_API_KEY"] = "sk-proj-WRntFT01XWQKkHE26sooT3BlbkFJ1iT5KOcXMcz7LTZd4XPO"
+os.environ["http_proxy"] = "http://127.0.0.1:7890"
+os.environ["https_proxy"] = "http://127.0.0.1:7890"
+client = OpenAI()
+client.base_url = os.getenv('OPENAI_API_BASE')
 umls_api_key = os.getenv('UMLS_API_KEY')
 
 
@@ -50,7 +53,7 @@ def process_text(user_arr):
         reply_prompt = f.read()
 
     prompt_arr = [{"role": item.get('role'), "content": item.get('content')} for item in user_arr]
-
+    print("prompt_arr:",prompt_arr)
     msg = [ 
         {"role": "system", "content": "You're an excellent doctor. Follow the user's instructions carefully. Style your responses in Markdown."},
         {"role": "user", "content": system_prompt},
@@ -62,15 +65,15 @@ def process_text(user_arr):
 
     msg = msg + prompt_arr
 
-    openai_response = openai.ChatCompletion.create(
+    openai_response = client.chat.completions.create(
         model='gpt-3.5-turbo',
         max_tokens=2048,
         temperature=0,
         messages=msg,
         # stream=True
     )
-    generated_text = openai_response['choices'][0]['message']['content']
-
+    generated_text = openai_response.choices[0].message.content
+    print("generated_text:",generated_text)
     matches = re.findall(r'\{.*?\}', generated_text)
       
     updated_text = generated_text  
@@ -87,14 +90,19 @@ def process_text(user_arr):
         kv_list.append(kv_dict)  
         
         updated_text = re.sub(re.escape(matched_content), '', updated_text)  
-      
-    return {"plain_text": updated_text.strip(), "reasoning_tuples": kv_list} 
+    plain_text=updated_text.strip()
+    if plain_text == "":
+        plain_text = "Thank you for your information! My medical reasoning based on your description is shown in the illustration view."
+    print("updated_text:",plain_text)
+    return {"plain_text": plain_text, "reasoning_tuples": kv_list} 
 
 @app.route('/chat', methods=['POST'])  
 def generate_response():  
     user_input = request.json.get('dataset')  
-    print(user_input.get('content'))
-    response = process_text(user_input.get('content'))  
+    print("user_input:",user_input.get('content'))
+    response = process_text(user_input.get('content')) 
+    
+    print("response",response)
     return jsonify(response)  
 
 
@@ -123,7 +131,7 @@ def get_usmle_topics():
 def get_cui_and_title(content):
     url = 'https://uts-ws.nlm.nih.gov/rest/search/current'
     params = {
-        'string': 'Fever',
+        'string': content,
         'apiKey': umls_api_key
     }
     response = requests.get(url, params=params)
@@ -168,7 +176,7 @@ def get_relations(CUI, label):
 
 def get_symptom_result(content):
     CUI, title = get_cui_and_title(content)
-
+    print("CUI:",CUI,"title:",title)
     ans = {
         'Symptom': title,
         'Definitions': get_definitions(CUI),
@@ -317,11 +325,17 @@ def get_complication_result(content):
     }
     return jsonify(ans)
 
-@app.route('/node', methods=['GET'])
+@app.route('/node', methods=['POST'])
 def get_node():
-    type = request.json.get('type')
-    content = request.json.get('content')
-
+    # type = request.json.get('type')
+    # content = request.json.get('content')
+    data = request.get_json()
+    dataset = data.get("dataset")
+    type = dataset.get('type')
+    content = dataset.get('content')
+    print(data)
+    print(type)
+    print(content)
     if type == 'Symptom':
         return get_symptom_result(content)
     elif type == 'Diagnosis':
